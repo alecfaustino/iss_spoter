@@ -20,7 +20,6 @@ const fetchCordsByIP = (ip, callback) => {
 
     if (error) return callback(error, null);
 
-    // const parsedResponse = JSON.parse(response);
     if (!body.success) {
       const msg = `It did not work! Error: Success status was ${body.success}. Server message says: ${body.message} when fetching for IP ${body.ip}`;
       callback(Error(msg), null);
@@ -35,8 +34,23 @@ const fetchCordsByIP = (ip, callback) => {
   });
 };
 
+const fetchISSFlyOverTimes = (coords, callback) => {
+  needle.get(`https://iss-flyover.herokuapp.com/json/?lat=${coords.latitude}&lon=${coords.longitude}`, (error, response, body) => {
+    //something
+
+    if (error) return callback(error, null);
+
+    if(response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching times. Response: ${body}`;
+      callback(Error(msg), null);
+    }
+
+    callback(null, body.response);
+  })
+}
 
 module.exports = {
   fetchMyIP,
   fetchCordsByIP,
+  fetchISSFlyOverTimes,
 };
