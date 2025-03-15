@@ -11,7 +11,7 @@ const printTimes = (times) => {
 };
 
 nextISSTimesForMyLocation((error, times) => {
-  if (error) return console.log("It didn't work!", error) 
+  if (error) return console.log("It didn't work!", error);
 
   printTimes(times);
 });

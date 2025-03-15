@@ -40,15 +40,15 @@ const fetchISSFlyOverTimes = (coords, callback) => {
 
     if (error) return callback(error, null);
 
-    if(response.statusCode !== 200) {
+    if (response.statusCode !== 200) {
       const msg = `Status Code ${response.statusCode} when fetching times. Response: ${body}`;
       callback(Error(msg), null);
       return;
     }
 
     callback(null, body.response);
-  })
-}
+  });
+};
 
 const nextISSTimesForMyLocation = (callback) => {
 
@@ -62,11 +62,11 @@ const nextISSTimesForMyLocation = (callback) => {
         if (error) return callback(error, null);
 
         callback(null, times);
-      })
-    })
-  })
+      });
+    });
+  });
 
-}
+};
 module.exports = {
   nextISSTimesForMyLocation,
 };
